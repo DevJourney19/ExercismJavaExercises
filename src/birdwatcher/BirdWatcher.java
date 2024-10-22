@@ -37,32 +37,17 @@ public class BirdWatcher {
         return Arrays.stream(birdsPerDay).anyMatch(t -> t == 0);
     }
 
-    //se realiza la suma de la cantidad de los pajaros denbtro de un limite establecido, comenzado desde el comienzo de la semana.
+    //The sum of the bird count is performed within an established limit, starting from the begining of the week.
+    //Se realiza la suma de la cantidad de los pajaros dentro de un limite establecido, comenzado desde el comienzo de la semana.
     public int getCountForFistDays(int numberOfDays) {
-        int sum = 0;
-        if (numberOfDays > 7) {
-            for (int i = 0; i < 7; i++) {
-                sum += birdsPerDay[i];
-            }
-            return sum;
-        }
-
-        for (int i = 0; i < numberOfDays; i++) {
-            sum += birdsPerDay[i];
-        }
-        return sum;
-
+        //The limit allows you to restrict the number of the elements of the array to work with.
+        //El limit permite restringir la cantidad del array para trabajar.
+        return Arrays.stream(birdsPerDay).limit(numberOfDays).sum();
     }
 
+    //The numbers of days is obtained in which more than 5 birds were surpassed.
+    //Se obtiene la cantidad de días, en las cuales se superan de 5 a más de aves.
     public int getBusyDays() {
-        int count = 0;
-        for (int i = 0; i < birdsPerDay.length; i++) {
-            if (birdsPerDay[i] >= 5) {
-                count++;
-            }
-        }
-        return count;
+        return (int) Arrays.stream(birdsPerDay).filter(t -> t >= 5).count();
     }
-
-
 }
